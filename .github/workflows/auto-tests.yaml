@@ -3,10 +3,12 @@ on:
   push:
     branches:
       - master
+      - attempt-to-fix-all-the-issue-ci
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
     branches:
       - master
+      - attempt-to-fix-all-the-issue-ci
 
 env:
   MINIKUBE_CPUS_NUMBER: 2
@@ -45,7 +47,7 @@ jobs:
       - name: Prepare environment for e2e
         run: |
           sudo apt-get update
-          sudo apt-get install socat
+          sudo apt-get install socat kubectl
           sudo mkdir -p $HOME/.kube $HOME/.minikube
           sudo chown -R $USER $HOME/.kube $HOME/.minikube
           make minikube-start \
@@ -55,6 +57,12 @@ jobs:
 
       - name: Jenkins Operator - e2e
         run: make e2e E2E_TEST_ARGS='-ginkgo.v'
+        continue-on-error: true
+
+      - name: Check logs
+        run: |
+          kubectl get pod -A -w
+          kubectl get ev -A -w
 
       - name: Jenkins Operator - Helm Chart tests
         run: |
