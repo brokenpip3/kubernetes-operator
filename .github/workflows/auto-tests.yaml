@@ -64,8 +64,8 @@ jobs:
 
       - name: Check logs
         run: |
-          kubectl get pod -A -w
-          kubectl get ev -A -w
+          kubectl get pod -A
+          kubectl get ev -A
 
       - name: Jenkins Operator - Helm Chart tests
         run: |
