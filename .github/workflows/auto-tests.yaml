@@ -3,12 +3,10 @@ on:
   push:
     branches:
       - master
-      - fix-e2e
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
     branches:
       - master
-      - fix-e2e
 
 env:
   MINIKUBE_CPUS_NUMBER: 2
@@ -57,14 +55,6 @@ jobs:
 
       - name: Jenkins Operator - e2e
         run: make e2e E2E_TEST_ARGS='-ginkgo.v'
-        continue-on-error: true
-
-      - name: Logs
-        run: |
-          kubectl get po -A
-          kubectl get ev -A
-        continue-on-error: true
-
 
       - name: Jenkins Operator - Helm Chart tests
         run: |
