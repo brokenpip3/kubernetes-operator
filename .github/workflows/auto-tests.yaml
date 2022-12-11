@@ -55,6 +55,9 @@ jobs:
             MEMORY_AMOUNT=${{ env.MINIKUBE_MEMORY_AMOUNT }} \
             CPUS_NUMBER=${{ env.MINIKUBE_CPUS_NUMBER }}
 
+      - name: install kubectl
+        uses: azure/setup-kubectl@v3
+
       - name: Jenkins Operator - e2e
         run: make e2e E2E_TEST_ARGS='-ginkgo.v'
         continue-on-error: true
