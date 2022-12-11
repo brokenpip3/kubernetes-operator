@@ -3,12 +3,10 @@ on:
   push:
     branches:
       - master
-      - attempt-to-fix-all-the-issue-ci
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
     branches:
       - master
-      - attempt-to-fix-all-the-issue-ci
 
 env:
   MINIKUBE_CPUS_NUMBER: 2
@@ -55,17 +53,8 @@ jobs:
             MEMORY_AMOUNT=${{ env.MINIKUBE_MEMORY_AMOUNT }} \
             CPUS_NUMBER=${{ env.MINIKUBE_CPUS_NUMBER }}
 
-      - name: install kubectl
-        uses: azure/setup-kubectl@v3
-
       - name: Jenkins Operator - e2e
         run: make e2e E2E_TEST_ARGS='-ginkgo.v'
-        continue-on-error: true
-
-      - name: Check logs
-        run: |
-          kubectl get pod -A
-          kubectl get ev -A
 
       - name: Jenkins Operator - Helm Chart tests
         run: |
