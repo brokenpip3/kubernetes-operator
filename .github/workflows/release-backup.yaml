@@ -30,7 +30,6 @@ jobs:
 
       - name: Run the e2e tests
         working-directory: backup/pvc 
-        run: make docker-build
         run: make docker-e2e
 
       - name: Configure Git
