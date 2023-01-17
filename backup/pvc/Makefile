@@ -58,7 +58,7 @@ spring-clean: ## Cleanup git ignored files (interactive)
 	git clean -Xdi
 
 .PHONY: checkmake
-HAS_CHECKMAKE := $(shell which checkmake)
+HAS_CHECKMAKE := $(shell command -v checkmake)
 checkmake: ## Check this Makefile
 	@echo "+ $@"
 ifndef HAS_CHECKMAKE
@@ -159,7 +159,7 @@ ifneq ($(GITUNTRACKEDCHANGES),)
 endif
 ifneq ($(GITIGNOREDBUTTRACKEDCHANGES),)
 	@echo "Ignored but tracked files:"
-	@git ls-files -i --exclude-standard
+	@git ls-files -i -c --exclude-standard
 	@echo
 endif
 	@echo "Dependencies:"
