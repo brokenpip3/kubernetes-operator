@@ -16,7 +16,7 @@ echo "Running backup"
 # branches/myorg/branches/myrepo/branches/master/config.xml should be retained while
 # branches/myorg/config.xml should not
 tar -C ${JENKINS_HOME} -czf "${BACKUP_TMP_DIR}/${backup_number}.tar.gz" --exclude jobs/*/workspace* --no-wildcards-match-slash --anchored --exclude jobs/*/config.xml -c jobs && \
-mv ${BACKUP_TMP_DIR}/${backup_number}.tar.gz ${BACKUP_DIR}/${backup_number}.tar.gz
+cp ${BACKUP_TMP_DIR}/${backup_number}.tar.gz ${BACKUP_DIR}/${backup_number}.tar.gz
 
 rm -r ${BACKUP_TMP_DIR}
 
