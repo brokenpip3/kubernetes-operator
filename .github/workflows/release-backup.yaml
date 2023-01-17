@@ -2,7 +2,9 @@ name: Release Backup Pvc
 on:
   workflow_dispatch:
   #test
-  branch: [ feat_backup_ci ]
+  push:
+    branches:
+      - feat_backup_ci
 
 
 jobs:
