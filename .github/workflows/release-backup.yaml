@@ -1,6 +1,9 @@
 name: Release Backup Pvc
 on:
   workflow_dispatch:
+  #test
+  branch: [ feat_backup_ci ]
+
 
 jobs:
   build-and-release:
