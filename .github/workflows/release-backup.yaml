@@ -25,9 +25,12 @@ jobs:
           echo "GOPATH=/home/runner/go" >> $GITHUB_ENV
 
       - name: Build the image
+        working-directory: backup/pvc 
         run: make docker-build
 
       - name: Run the e2e tests
+        working-directory: backup/pvc 
+        run: make docker-build
         run: make docker-e2e
 
       - name: Configure Git
@@ -35,7 +38,8 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Run the e2e tests
+      - name: Bump the version
+        working-directory: backup/pvc 
         run: make bump
 
       - name: Login to DockerHub
@@ -45,6 +49,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Build and push the image to DockerHub
+        working-directory: backup/pvc 
         run: |
           git reset --hard
           make docker-release
