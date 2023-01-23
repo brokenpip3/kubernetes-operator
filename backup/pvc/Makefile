@@ -23,6 +23,8 @@ ifneq ($(GITIGNOREDBUTTRACKEDCHANGES),)
     GITCOMMIT := $(GITCOMMIT)-dirty
 endif
 
+PLATFORM := $(shell echo $(UNAME_S) | tr A-Z a-z)
+
 VERSION_TAG := $(VERSION)
 LATEST_TAG := latest
 BUILD_TAG := $(GITBRANCH)-$(GITCOMMIT)
