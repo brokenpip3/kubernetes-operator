@@ -127,6 +127,16 @@ docker-run: docker-build ## Run the container in docker, you can use EXTRA_ARGS
 	docker run --rm -i $(DOCKER_FLAGS) \
 		$(DOCKER_REGISTRY)-$(NAME):$(GITCOMMIT) $(ARGS)
 
+.PHONY: sembump
+HAS_SEMBUMP := $(shell which $(PROJECT_DIR)/bin/sembump)
+sembump: # Download sembump locally if necessary
+    @echo "+ $@"
+ifndef HAS_SEMBUMP
+    mkdir -p $(PROJECT_DIR)/bin
+    wget -O $(PROJECT_DIR)/bin/sembump https://github.com/justintout/sembump/releases/download/v0.1.0/sembump-$(PLATFORM)-amd64
+    chmod +x $(PROJECT_DIR)/bin/sembump
+endif
+
 .PHONY: bump-version
 BUMP := patch
 bump-version: ## Bump the version in the version file. Set BUMP to [ patch | major | minor ]
