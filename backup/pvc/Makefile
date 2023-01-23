@@ -135,7 +135,7 @@ bump-version: ## Bump the version in the version file. Set BUMP to [ patch | maj
 	@echo "Bumping VERSION.txt from $(VERSION) to $(NEW_VERSION)"
 	echo $(NEW_VERSION) > VERSION.txt
 	git add VERSION.txt
-	git commit -vaem "Bump backup PVC version to $(NEW_VERSION)"
+	git commit -avm "Bump backup PVC version to $(NEW_VERSION)"
 
 .PHONY: tag
 tag: ## Create a new git tag to prepare to build a release
