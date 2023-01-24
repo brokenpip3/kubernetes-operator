@@ -83,15 +83,16 @@ docker-e2e: docker-build-e2e ## Make e2e tests for docker image
 docker-login: ## Log in into the Docker repository
 	@echo "+ $@"
 
+.PHONY: docker-build-e2e
+docker-build-e2e: UID=1001
+docker-build-e2e: GID=1001 
+docker-build-e2e: docker-build
+
 .PHONY: docker-build
 docker-build: check-env ## Build the container
 	@echo "+ $@"
 	docker build . --build-arg UID=$(UID) --build-arg GID=$(GID) -t $(DOCKER_REGISTRY)-$(NAME):$(GITCOMMIT) --file Dockerfile
 
-.PHONY: docker-build-e2e
-docker-build-e2e: check-env ## Build the container
-	@echo "+ $@"
-	docker build . --build-arg UID=$(GH_E2E_UID) --build-arg GID=$(GH_E2E_GID) -t $(DOCKER_REGISTRY)-$(NAME):$(GITCOMMIT) --file Dockerfile
 
 .PHONY: docker-images
 docker-images: ## List all local containers

@@ -16,7 +16,6 @@ jobs:
   build-and-release-backup:
     name: Release Backup Pvc, build, bump and push new image
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -47,4 +46,5 @@ jobs:
         if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
         run: |
           git reset --hard
+          make -C backup/pvc docker-build
           make -C backup/pvc docker-release
