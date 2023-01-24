@@ -2,7 +2,7 @@
 title: "Installing the Operator"
 linkTitle: "Installing the Operator"
 weight: 1
-date: 2021-12-08
+date: 2023-01-08
 description: >
   How to install Jenkins Operator
 ---
@@ -638,7 +638,7 @@ Backup defines configuration of Jenkins backup.
                 <code>image</code>
             </td>
             <td>
-                virtuslab/jenkins-operator-backup-pvc:v0.0.8
+                virtuslab/jenkins-operator-backup-pvc:v0.1.1
             </td>
             <td>
                 Image used by backup feature.

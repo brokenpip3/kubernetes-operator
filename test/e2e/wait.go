@@ -93,5 +93,5 @@ func waitForJenkinsSafeRestart(jenkinsClient jenkinsclient.Jenkins) {
 			return false, err
 		}
 		return true, nil
-	}, time.Second*200, time.Second*5).Should(gomega.BeTrue())
+	}, time.Duration(170)*retryInterval, retryInterval).Should(gomega.BeTrue())
 }

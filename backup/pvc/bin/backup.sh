@@ -6,7 +6,11 @@ set -eo pipefail
 [[ -z "${BACKUP_DIR}" ]] && echo "Required 'BACKUP_DIR' env not set" && exit 1;
 [[ -z "${JENKINS_HOME}" ]] && echo "Required 'JENKINS_HOME' env not set" && exit 1;
 BACKUP_TMP_DIR=$(mktemp -d)
+<<<<<<< HEAD
 trap "test -d "${BACKUP_TMP_DIR}" && rm -fr "${BACKUP_TMP_DIR}"" EXIT
+=======
+trap "test -d "${BACKUP_TMP_DIR}" && rm -fr "${BACKUP_TMP_DIR}"" EXIT ERR SIGINT SIGTERM
+>>>>>>> origin/master
 
 backup_number=$1
 echo "Running backup"
@@ -18,7 +22,7 @@ echo "Running backup"
 tar -C ${JENKINS_HOME} -czf "${BACKUP_TMP_DIR}/${backup_number}.tar.gz" --exclude jobs/*/workspace* --no-wildcards-match-slash --anchored --exclude jobs/*/config.xml -c jobs && \
 cp ${BACKUP_TMP_DIR}/${backup_number}.tar.gz ${BACKUP_DIR}/${backup_number}.tar.gz
 
-rm -r ${BACKUP_TMP_DIR}
+rm -rf "${BACKUP_TMP_DIR}"
 
 [[ ! -s ${BACKUP_DIR}/${backup_number}.tar.gz ]] && echo "backup file '${BACKUP_DIR}/${backup_number}.tar.gz' is empty" && exit 1;
 
