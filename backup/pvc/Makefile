@@ -75,7 +75,7 @@ endef
 
 .PHONY: docker-e2e
 E2E_TESTS := $(shell ls e2e)
-docker-e2e: docker-build ## Make e2e tests for docker image
+docker-e2e: docker-build-e2e ## Make e2e tests for docker image
 	@echo "+ $@"
 	$(foreach TEST_NAME,$(E2E_TESTS), $(call e2e,$(TEST_NAME)))
 
