@@ -23,8 +23,6 @@ ifneq ($(GITIGNOREDBUTTRACKEDCHANGES),)
     GITCOMMIT := $(GITCOMMIT)-dirty
 endif
 
-PLATFORM := $(shell echo $(UNAME_S) | tr A-Z a-z)
-
 VERSION_TAG := $(VERSION)
 LATEST_TAG := latest
 BUILD_TAG := $(GITBRANCH)-$(GITCOMMIT)
@@ -92,7 +90,6 @@ docker-build-e2e: docker-build
 docker-build: check-env ## Build the container
 	@echo "+ $@"
 	docker build . --build-arg UID=$(UID) --build-arg GID=$(GID) -t $(DOCKER_REGISTRY)-$(NAME):$(GITCOMMIT) --file Dockerfile
-
 
 .PHONY: docker-images
 docker-images: ## List all local containers
