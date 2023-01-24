@@ -26,7 +26,6 @@ jobs:
 
       - name: Build the e2e image
         working-directory: backup/pvc 
-        env:
         run: make docker-build-e2e
 
       - name: Run the e2e tests
