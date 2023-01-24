@@ -89,7 +89,7 @@ docker-build: check-env ## Build the container
 	docker build . --build-arg UID=$(UID) --build-arg GID=$(GID) -t $(DOCKER_REGISTRY)-$(NAME):$(GITCOMMIT) --file Dockerfile
 
 .PHONY: docker-build-e2e
-docker-build: check-env ## Build the container
+docker-build-e2e: check-env ## Build the container
 	@echo "+ $@"
 	docker build . --build-arg UID=$(GH_E2E_UID) --build-arg GID=$(GH_E2E_GID) -t $(DOCKER_REGISTRY)-$(NAME):$(GITCOMMIT) --file Dockerfile
 
